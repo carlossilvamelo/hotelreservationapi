@@ -5,7 +5,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+
 import com.hotelreservation.factory.ServiceFactory;
+import com.hotelreservation.models.Hotel;
 import com.hotelreservation.models.enumeration.CostumerType;
 import com.hotelreservation.service.impl.HotelReservationService;
 import com.hotelreservation.utils.InputPreProcessingUtil;
@@ -15,7 +17,7 @@ import com.hotelreservationapi.models.InputDTO;
 public class BestPriceCalculatorService implements IBestPriceCalculatorService{
 
 	@Override
-	public String calculateBestHotel(InputDTO inputDTO) {
+	public List<Hotel> calculateBestHotel(InputDTO inputDTO) {
 		
 		HotelReservationService hotelReservationService = ServiceFactory.getHotelReservationService();
 		CostumerType costumerType = inputDTO.getCostumerType();
@@ -28,9 +30,9 @@ public class BestPriceCalculatorService implements IBestPriceCalculatorService{
 					,InputPreProcessingUtil.getMounthName(date.getMonth().getValue()), date.getYear(), date.getDayOfWeek().name()));
 			stringBuilder.append(",");
 		}
-		List<String> hotelNames = hotelReservationService.calculateBestHotelPrice(Arrays.asList(stringBuilder.toString()));
+		List<Hotel> hotels = hotelReservationService.calculateBestHotel(Arrays.asList(stringBuilder.toString()));
 		
-		return hotelNames.get(0);
+		return hotels;
 	}
 
 }

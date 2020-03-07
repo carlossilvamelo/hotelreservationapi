@@ -1,8 +1,12 @@
 package com.hotelreservationapi.service;
 
+import java.util.List;
+
+import com.hotelreservation.models.Hotel;
 import com.hotelreservationapi.models.InputDTO;
 
 public interface IBestPriceCalculatorService {
 
-	public String calculateBestHotel(InputDTO inputDTO);
+	public List<Hotel> calculateBestHotel(InputDTO inputDTO);
+
 }
